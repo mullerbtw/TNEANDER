@@ -1,0 +1,189 @@
+  Ismael Muller de Oliveira - 00589254
+
+  0   32 200   LDA 200  ; carrega '0' no acumulador
+  2   16 131   STA 131  ; inicializa Distância de Hamming em zero
+  4   32 128   LDA 128	; carrega acumulador com 'a'
+  6   96       NOT	; faz operação NOT sobre o valor 'a' no acumulador
+  7   80 129   AND 129	; faz operação AND com 'b' sobre o valor 'NOT a' no acumulador
+  9   16 130   STA 130	; aloca resultado da operação AND na posição 130 (provisoriamente)
+ 11   32 129   LDA 129	; carrega 'b' no acumulador
+ 13   96       NOT	; faz operação NOT sobre o valor 'b' no acumulador
+ 14   80 128   AND 128	; faz operação AND com 'a' sobre o valor 'NOT b' no acumulador
+ 16   64 130   OR  130	; faz operação OR com o que estava armazenado na posição 130
+ 18   16 130   STA 130	; aloca resultado da operação OR na posição 130 (fim do XOR)
+ 20   32 130   LDA 130	; carrega acumulador com 'XOR'
+ 22   80 132   AND 132	; faz operação AND com '1' (máscara lógica) sobre o valor 'XOR' no acumulador
+ 24   48 140   ADD 140	; faz operação ADD com '-1' sobre o valor no acumulador
+ 26  160  30   JZ  30	; checa se flag Z está ativada (se sim, pula para linha 30)
+ 28  128  36   JMP 36	; else (pula para linha 36)
+ 30   32 131   LDA 131	; começo do if (carrega Distância de Hamming no acumulador)
+ 32   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+ 34   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+ 36   32 130   LDA 130	; carrega acumulador com 'XOR'
+ 38   80 133   AND 133	; faz operação AND com '2' (máscara lógica) sobre o valor 'XOR' no acumulador
+ 40   48 141   ADD 141	; faz operação ADD com '-2' sobre o valor no acumulador
+ 42  160  46   JZ  46	; checa se flag Z está ativada (se sim, pula para linha 46)
+ 44  128  52   JMP 52	; else (pula para linha 52)
+ 46   32 131   LDA 131	; começo do if (carrega Distância de Hamming no acumulador)
+ 48   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+ 50   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+ 52   32 130   LDA 130	; carrega acumulador com 'XOR'
+ 54   80 134   AND 134	; faz operação AND com '4' (máscara lógica) sobre o valor 'XOR' no acumulador
+ 56   48 142   ADD 142	; faz operação ADD com '-4' sobre o valor no acumulador
+ 58  160  62   JZ  62	; checa se flag Z está ativada (se sim, pula para linha 62)
+ 60  128  68   JMP 68	; else (pula para linha 68)
+ 62   32 131   LDA 131	; começo do if (carrega Distância de Hamming no acumulador)
+ 64   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+ 66   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+ 68   32 130   LDA 130	; carrega acumulador com 'XOR'
+ 70   80 135   AND 135	; faz operação AND com '8' (máscara lógica) sobre o valor 'XOR' no acumulador
+ 72   48 143   ADD 143	; faz operação ADD com '-8' sobre o valor no acumulador
+ 74  160  78   JZ  78	; checa se flag Z está ativada (se sim, pula para linha 78)
+ 76  128  84   JMP 84	; else (pula para linha 84)
+ 78   32 131   LDA 131	; começo do if (carrega Distância de Hamming)
+ 80   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+ 82   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+ 84   32 130   LDA 130	; carrega acumulador com 'XOR'
+ 86   80 136   AND 136	; faz operação AND com '16' (máscara lógica) sobre o valor 'XOR' no acumulador
+ 88   48 144   ADD 144	; faz operação ADD com '-16' sobre o valor no acumulador
+ 90  160  94   JZ  94	; checa se flag Z está ativada (se sim, pula para linha 94)
+ 92  128 100   JMP 100	; else (pula para linha 100)
+ 94   32 131   LDA 131	; começo do if (carrega Distância de Hamming)
+ 96   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+ 98   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+100   32 130   LDA 130	; carrega acumulador com 'XOR'
+102   80 137   AND 137	; faz operação AND com '32' (máscara lógica) sobre o valor 'XOR' no acumulador
+104   48 145   ADD 145	; faz operação ADD com '-32' sobre o valor no acumulador
+106  160 110   JZ  110	; checa se flag Z está ativada (se sim, pula para linha 110)
+108  128 116   JMP 116	; else (pula para linha 116)
+110   32 131   LDA 131	; começo do if (carrega Distância de Hamming)
+112   48 132   ADD 132	; adiciona '1' à Distância de Hamming
+114   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if
+116   32 130   LDA 130	; carrega acumulador com 'XOR'
+118   80 138   AND 138	; faz operação AND com '64' (máscara lógica) sobre o valor 'XOR' no acumulador
+120   48 146   ADD 146	; faz operação ADD com '-64' sobre o valor no acumulador
+122  160 160   JZ  160	; checa se flag Z está ativada (se sim, pula para linha 160 - para desviar declarações da memória)
+124  128 166   JMP 166	; else (pula para linha 166 - para desviar declarações da memória)
+
+126    0       NOP
+127    0       NOP
+
+128    0    	        ; posição do 'a'  
+129    0		; posição do 'b'      
+130    0		; posição do 'XOR'      
+131    0		; posição da Distância de Hamming      
+132    1      		; máscara lógica '1'   - bit posição '0'
+133    2		; máscara lógica '2'   - bit posição '1'     
+134    4		; máscara lógica '4'   - bit posição '2'      
+135    8		; máscara lógica '8'   - bit posição '3'      
+136   16		; máscara lógica '16'  - bit posição '4'      
+137   32		; máscara lógica '32'  - bit posição '5'      
+138   64		; máscara lógica '64'  - bit posição '6'      
+139  128		; máscara lógica '128' - bit posição '7'       
+140  255      		; '-1' para somar com AND entre 'XOR' e máscara lógica '1'
+141  254		; '-2' para somar com AND entre 'XOR' e máscara lógica '2'      
+142  252      		; '-4' para somar com AND entre 'XOR' e máscara lógica '4'      
+143  248      		; '-8' para somar com AND entre 'XOR' e máscara lógica '8'      
+144  240      		; '-16' para somar com AND entre 'XOR' e máscara lógica '16'      
+145  224      		; '-32' para somar com AND entre 'XOR' e máscara lógica '32'      
+146  192      		; '-64' para somar com AND entre 'XOR' e máscara lógica '64'      
+147  128      		; '-128' para somar com AND entre 'XOR' e máscara lógica '128'      
+148    0      
+149    0      
+150    0      
+151    0      
+152    0      
+153    0      
+154    0      
+155    0      
+156    0      
+157    0      
+158    0      
+159    0
+      
+160   32 131   LDA 131	; começo do if (carrega Distância de Hamming)   
+162   48 132   ADD 132	; adiciona '1' à Distância de Hamming      
+164   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if      
+166   32 130   LDA 130	; carrega acumulador com 'XOR'      
+168   80 139   AND 139	; faz operação AND com '128' (máscara lógica) sobre o valor 'XOR' no acumulador   
+170   48 147   ADD 147	; faz operação ADD com '-128' sobre o valor no acumulador   
+172  160 176   JZ  176	; checa se flag Z está ativada (se sim, pula para linha 176)   
+174  128 182   JMP 182	; else (pula para linha 182 - HLT)    
+176   32 131   LDA 131	; começo do if (carrega Distância de Hamming)     
+178   48 132   ADD 132	; adiciona '1' à Distância de Hamming   
+180   16 131   STA 131	; aloca acumulador na posição 131 (Distância de Hamming) - fim do if     
+182  240       HLT	; fim do programa
+      
+183    0      
+184    0      
+185    0      
+186    0      
+187    0      
+188    0      
+189    0      
+190    0      
+191    0      
+192    0      
+193    0      
+194    0      
+195    0      
+196    0      
+197    0      
+198    0      
+199    0      
+200    0      
+201    0      
+202    0      
+203    0      
+204    0      
+205    0      
+206    0      
+207    0      
+208    0      
+209    0      
+210    0      
+211    0      
+212    0      
+213    0      
+214    0      
+215    0      
+216    0      
+217    0      
+218    0      
+219    0      
+220    0      
+221    0      
+222    0      
+223    0      
+224    0      
+225    0      
+226    0      
+227    0      
+228    0      
+229    0      
+230    0      
+231    0      
+232    0      
+233    0      
+234    0      
+235    0      
+236    0      
+237    0      
+238    0      
+239    0      
+240    0      
+241    0      
+242    0      
+243    0      
+244    0      
+245    0      
+246    0      
+247    0      
+248    0      
+249    0      
+250    0      
+251    0      
+252    0      
+253    0      
+254    0      
+255    0      
